@@ -18,13 +18,13 @@ requirejs(['../css', '../normalize'], function(css, normalize) {
   
   console.log('\nTesting URL Base Conversions');
   assert(
-    'Changing subfolder', 
-    normalize.convertURIBase('test', '/one/two/', '/one/three/'), 
+    'Changing subfolder',
+    normalize.convertURIBase('test', '/one/two/', '/one/three/'),
     '../two/test'
   );
   assert(
-    'Changing subfolder with backtrack', 
-    normalize.convertURIBase('../test', '/one/two/', '/one/three/'), 
+    'Changing subfolder with backtrack',
+    normalize.convertURIBase('../test', '/one/two/', '/one/three/'),
     '../test'
   );
   assert(
@@ -46,6 +46,11 @@ requirejs(['../css', '../normalize'], function(css, normalize) {
     'absolute protocol paths work with base conversion',
     normalize.convertURIBase('some/file', 'http://some.cdn.com/baseUrl/', 'baseUrl/'),
     'http://some.cdn.com/baseUrl/some/file'
+  );
+  assert(
+    'Converting with backtrack in fromBase',
+    normalize('url(../test)', '/one/two/../three', '/one/four'),
+    'url(../test)'
   );
   console.log('\nTesting Stylesheet Regular Expressions');
   assert(
